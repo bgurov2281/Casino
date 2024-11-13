@@ -15,6 +15,7 @@ void myFunction(){
     printf("This is ben");
     printf("test2");
     printf("test3");
+    printf("test96");
 };
 
 // BRYAN CODE
