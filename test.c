@@ -13,7 +13,8 @@ void myFunction(){
     printf("Hello ben this is my code");
     printf("This is Bryan");
     printf("This is ben");
-    printf("test1");
+    printf("test2");
+    printf("test3");
 };
 
 // BRYAN CODE
