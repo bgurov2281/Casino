@@ -12,6 +12,7 @@ int main(){
 void myFunction(){
     printf("Hello ben this is my code");
     printf("This is Bryan");
+    printf("This is ben");
 };
 
 // BRYAN CODE
