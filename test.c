@@ -3,7 +3,7 @@ int main(){
     int age;
     printf("How old are you: ");
     scanf("%d", &age);
-    printf("You are %d years old!!", age);
+    printf("You are %d years old!!", age);  //age
     return 0;
 }
 
