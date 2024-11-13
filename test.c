@@ -19,6 +19,7 @@ void myFunction(){
     printf("test69");
 };
 
+<<<<<<< HEAD
 void testFunction3(){
     /*
     he
@@ -50,6 +51,36 @@ void testFunction4(){
     e
     e*/
 }
+=======
+void testFunction(){
+
+    //many lines
+    /*
+    m
+    a
+    a
+    a
+    any
+     lines
+     */
+}
+
+void testFunction2(){
+
+    /*
+    mmaa
+    a
+    a
+    a
+    annnyyyy
+    
+    
+    changes
+    */
+   
+}
+
+>>>>>>> 2e708cfe10b757ecdfbf8a388066ae79a83ff0af
 // BRYAN CODE
 //FUCNTION 1 
 //FUNCION XX
