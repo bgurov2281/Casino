@@ -9,6 +9,9 @@ int main(){
 
 //TEST TEST
 
+void myFunction(){
+    printf("Hello ben this is my code");
+};
 
 // BRYAN CODE
 //FUCNTION 1 
