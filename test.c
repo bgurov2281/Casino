@@ -7,6 +7,7 @@ IM A MINER*/
 int main(){
     int age;
     printf("How old are you: ");
+    printf("\nBen was here");
     scanf("%d", &age);
     printf("You are %d years old!!", age);  //age
     return 0;
