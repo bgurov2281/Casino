@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void X(void){
+int X(void){
     printf("\n10\n");
 };
 
