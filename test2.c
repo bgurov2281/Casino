@@ -5,7 +5,7 @@ int main() {
     int ratings[5];
     char option = ' ';
     int i;
-
+//meowmeowmeowmeowmeow
     // Prompt user to input jersey numbers and ratings
     for (i = 0; i < 5; i++) {
         printf("Enter player %d's jersey number:\n", i + 1);
