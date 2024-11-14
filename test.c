@@ -72,19 +72,9 @@ void testFunction(){
 }
 
 /*
-h
-h
-h
-
-tt
-
-t
-t
-t
-t
-t
-t
-t*/
+this is ben hahahahahaha
+lol imagine fetching this
+*/
 void testFunction2(){
 
     /*
