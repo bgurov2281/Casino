@@ -2,6 +2,19 @@
 #include<stdlib.h>
 #include<time.h>
 
+void blackjack(int yeah)
+{
+    printf("yeah");
+}
+void roulette(int yee)
+{
+    printf("yee");
+}
+void cashout(int cash)
+{
+    printf("cash");
+}
+
 //function for random number generator for the reels
 int getRandomGenerator(int max, int min){
     return (rand() % (max - min + 1)) + min; 
@@ -148,12 +161,14 @@ void GameThree(int max,int min, int tokens, int lck2)
         }
     }
 }
-int main()
+void slots(int tokens,int lck,int lck2,int max,int min, int choice)
 {
-    int tokens=10;
+    
+    /*tokens=10; /*
     int lck,lck2;
     int choice;
-    int max, min=1;
+    int max, min=1;*/
+    min=1;
 while(1)
 {
 printf("Choose a game any game: \n");
@@ -189,12 +204,56 @@ switch(choice)
     break;
 
     case 4:
-            printf("Main Menu\n");
+            main();
             exit(0);
     
      default:
                 printf("Invalid Choice. Feel free to try again. \n");
 }
 }
-return 0;
+//return 0;
+}
+int main()
+{
+
+    int yeah,yee,cash,max,min,tokens,lck,lck2,choice;
+    printf("How many tokens would you like to buy: \n");
+    scanf("%d", &tokens);
+    //int choice;
+    while(1)
+    {
+        printf("Welcome pick your poison: \n");
+        printf("1.Slots \n");
+        printf("2.Black Jack \n");
+        printf("3.Roulette \n");
+        printf("4.Cashout \n");
+        printf("5.Quit \n");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                    slots(tokens,lck,lck2,max,min,choice);
+            break;
+
+            case 2:
+                    blackjack(yeah);
+            break;
+            
+            case 3:
+                    roulette(yee);
+            break;
+
+            case 4:
+                    cashout(cash);
+            break;
+
+            case 5:
+                    printf("Thank you for playing. \n");
+                    exit(0);
+
+                default:
+                        printf("Invalid Choice. Feel free to try again. ");
+        }
+    }
 }
