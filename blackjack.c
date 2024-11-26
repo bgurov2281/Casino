@@ -19,7 +19,7 @@ void cardDeck(Card *deck){
     char *ranks[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K"};
     int values[] = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}; //Blackjack Values
 
-    // First deck
+    // deck of cards
     for(int deckNum = 0; deckNum < 2; deckNum++){
         for(int i = 0; i < NUM_SUITS; i++){
             for(int j = 0; j < NUM_RANKS; j++){
@@ -174,7 +174,7 @@ int main(){
         char choice;
         printf("Play again? (y/n): ");
         scanf(" %c", &choice);
-        
+
         if (choice != 'y'){
             break;
         }
