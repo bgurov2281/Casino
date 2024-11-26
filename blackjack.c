@@ -15,8 +15,8 @@ typedef struct {
 
 void cardDeck(Card *deck){
 
-    char *suits[] = {"Hearts", "Diamonds", "Clubs", "Spades"};
-    char *ranks[] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+    char *suits[] = {"<3", "<>", "&&", "##"};
+    char *ranks[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     int values[] = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}; //Blackjack Values
 
     // First deck
@@ -70,7 +70,11 @@ int calculateHandValue(Card *deck, int *hand, int numCards){
 
 void printHand(Card *deck, int *hand, int numCards){
     for (int i = 0; i < numCards; i++){
-        printf("%s of %s\n", deck[hand[i]].rank, deck[hand[i]].suit);
+        printf("/-----/\n");
+        printf("|%s   |\n", deck[hand[i]].suit);
+        printf("|  %s  |\n", deck[hand[i]].rank);
+        printf("|   %s|\n", deck[hand[i]].suit);
+        printf("/-----/\n");
     }
 }
 
