@@ -2,6 +2,28 @@
 #include<stdlib.h>
 #include<time.h>
 
+void craps(int max,int min)
+{
+        srand(time(0));
+
+    max=6; min=1;
+    int dsum;
+    int dice1 = getRandomGenerator(max,min);
+    int dice2 = getRandomGenerator(max,min);
+    dsum=dice1+dice2;
+    printf("Dice 1= %d\t",dice1);
+    printf("Dice 2= %d\n",dice2);
+    printf("Roll is %d\n",dsum);
+    if(dsum==7||dsum==11)
+    {
+        printf("What a stroke of luck, you have WON!!");
+    }
+    else
+    {
+        printf("Roll again");
+    }
+}
+
 void blackjack(int yeah)
 {
     printf("yeah");
@@ -14,6 +36,7 @@ void cashout(int cash)
 {
     printf("cash");
 }
+
 
 //function for random number generator for the reels
 int getRandomGenerator(int max, int min){
@@ -129,6 +152,7 @@ void GameThree(int max,int min, int tokens, int lck2)
     jckptodds=pout/jckptout;
     scndodds=pout/wout;
 
+    printf("\n\n");
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
     if(reel1==reel2 && reel2==reel3)   
@@ -142,7 +166,7 @@ void GameThree(int max,int min, int tokens, int lck2)
         if((reel1==reel2 && reel3!=reel2 && reel1==lck2)||(reel2==reel3 && reel1!=reel3 && reel2==lck2)||(reel1==reel3 && reel2!=reel3 && reel1==lck2))
         {
             tokens=tokens+(tokens*pairodds);
-            printf("Better luck next time but you're not going home with nothing\n");
+            printf("Seems like those lucky numbers did have some magic after all\n");
             printf("Tokens: %d\n", tokens);
         }
         else
@@ -157,6 +181,7 @@ void GameThree(int max,int min, int tokens, int lck2)
                         {
                             printf("Yeah just put the frys in the bag bro\n");
                             printf("Tokens: %d\n", tokens);
+                            printf("\n\n");
                         }
         }
     }
@@ -171,11 +196,12 @@ void slots(int tokens,int lck,int lck2,int max,int min, int choice)
     min=1;
 while(1)
 {
+printf("\n\n");
 printf("Choose a game any game: \n");
 printf("1.Traditional Jackpot \n");
 printf("2.Super Jackpot \n");
 printf("3.Pairs Parade \n");
-printf("4.Back to Main Menu \n");
+printf("4.Back to Main Menu \n\n\n");
 scanf("%d", &choice);
 
 switch(choice)
@@ -204,7 +230,7 @@ switch(choice)
     break;
 
     case 4:
-            main();
+            return;
             exit(0);
     
      default:
@@ -222,12 +248,14 @@ int main()
     //int choice;
     while(1)
     {
+        printf("\n\n");
         printf("Welcome pick your poison: \n");
         printf("1.Slots \n");
         printf("2.Black Jack \n");
         printf("3.Roulette \n");
-        printf("4.Cashout \n");
-        printf("5.Quit \n");
+        printf("4.Craps \n");
+        printf("5.Cashout \n");
+        printf("6.Quit \n");
         scanf("%d", &choice);
 
         switch(choice)
@@ -245,10 +273,16 @@ int main()
             break;
 
             case 4:
-                    cashout(cash);
+                    min=1;
+                    max=6;
+                    craps(max,min);
             break;
 
             case 5:
+                    cashout(cash);
+            break;
+
+            case 6:
                     printf("Thank you for playing. \n");
                     exit(0);
 
