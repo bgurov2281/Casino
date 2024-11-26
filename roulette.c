@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include <time.h>
 
-int main(void) {
-
-    printf("fuck you ben\n");
+int RouletteSpin() {
+    return srand(time(NULL));
 
 }
