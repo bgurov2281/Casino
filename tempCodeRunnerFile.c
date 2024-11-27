@@ -447,6 +447,15 @@ scndodds=pout/wout;
 
     printf("Place your bet PLEASE:");
     scanf("%d", &bet);
+    if (bet==tokens)
+    {
+        printf("Please place a bet less than or equal to %d, enter new bet:", tokens);
+        scanf("%d",&bet);
+    }
+    else 
+    {
+    printf("\n");
+    }
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
     if(reel1==reel2 && reel2==reel3)   
