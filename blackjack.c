@@ -175,12 +175,16 @@ int main(){
         printf("Play again? (y/n): ");
         scanf(" %c", &choice);
 
-        if (choice != 'y'){
+        if (choice == 'y'){
+            
+        }
+        else if (choice == 'n'){
             break;
         }
     }
 
     printf("Game over! You ended with %d tokens.\n", tokens);
+    //add main menu function
 
     return 0;
 }
