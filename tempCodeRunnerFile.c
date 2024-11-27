@@ -322,6 +322,10 @@ char* FindColor(int number) {
 }
 
 void PlayRoulette(int betAmount, char* betType, int betNumber) {
+    if (betNumber > tokens) {
+        printf("You cannot bet more tokens than what you have!\n\n\n");
+        return;
+    }
     int resultNumber = RouletteSpin();
     char* color = FindColor(resultNumber);
 
