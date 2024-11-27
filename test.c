@@ -258,8 +258,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber);
 
 
 
-void roulette()
-{
+void roulette() {
     int betAmount;
     char betType[15];
     char userChoice;
@@ -320,6 +319,11 @@ char* FindColor(int number) {
 }
 
 void PlayRoulette(int betAmount, char* betType, int betNumber) {
+    if(betAmount > tokens) {
+        printf("You cannot bet more tokens than what you have!\n\n");
+        return;
+    }
+
     int resultNumber = RouletteSpin();
     char* color = FindColor(resultNumber);
 
@@ -577,7 +581,7 @@ void GameThree(int max,int min, int lck2)
 void slots(int lck,int lck2,int max,int min, int choice)
 {
     
-    /*tokens=10; /*
+    /*tokens=10; 
     int lck,lck2;
     int choice;
     int max, min=1;*/
