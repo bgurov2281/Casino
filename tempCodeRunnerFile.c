@@ -636,6 +636,45 @@ switch(choice)
 }
 //return 0;
 }
+
+void gameinfo(int choice)
+{
+    while(1)
+    {
+        printf("1.Information on Slots");
+        printf("2.Information on Blackjack");
+        printf("3.Information on Roulette");
+        printf("4.Information on Craps");
+        printf("5.Back to Main Menu");
+        scanf("%d", &choice);
+        switch(choice)
+        {
+        case 1:
+
+        break;
+
+        case 2:
+
+        break;
+
+        case 3:
+
+        break;
+
+        case 4:
+
+        break;
+
+        case 5:
+        return;
+        exit(0);
+
+        default:
+                        printf("Invalid Choice. Feel free to try again. ");
+        }
+    }
+}
+
 int main()
 {
 
@@ -657,7 +696,8 @@ int main()
         printf("*           3. Play Roulette             *\n");
         printf("*           4. Play Craps                *\n");
         printf("*           5. View Tokens               *\n");
-        printf("*           6. Exit                      *\n");
+        printf("*           6. Game Information          *\n");
+        printf("*           7. Exit                      *\n");
         printf("*                                        *\n");
         printf("******************************************\n");
         scanf("%d", &choice);
@@ -687,6 +727,10 @@ int main()
             break;
 
             case 6:
+                    gameinfo();
+            break;
+
+            case 7:
                     printf("Thank you for playing. \n");
                     exit(0);
 
