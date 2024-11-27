@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<time.h>
 
+int tokens = 100; //Global variable for tokens
+
 const int NUM_SUITS = 4;
 const int NUM_RANKS = 13;
 const int NUM_CARDS = 52;
@@ -78,7 +80,7 @@ void printHand(Card *deck, int *hand, int numCards){
     }
 }
 
-void playBlackjack(Card *deck, int *tokens){
+void playBlackjack(Card *deck){
     int cardDrawn[TOTAL_CARDS];
     for(int i = 0; i < TOTAL_CARDS; i++){
         cardDrawn[i] = 0;
@@ -89,10 +91,10 @@ void playBlackjack(Card *deck, int *tokens){
     int bet;
 
     //Get the player's bet
-    printf("\nYou have %d tokens. Enter your bet: ", *tokens);
+    printf("\nYou have %d tokens. Enter your bet: ", tokens);
     scanf("%d", &bet);
 
-    if(bet > *tokens){
+    if(bet > tokens){
         printf("You don't have enough tokens to make that bet.\n");
         return;
     }
@@ -126,7 +128,7 @@ void playBlackjack(Card *deck, int *tokens){
     }
     if (playerValue > 21){
         printf("\nYou busted! Dealer wins.\n");
-        *tokens -= bet;
+        tokens -= bet;
         return;
     }
 
@@ -145,32 +147,31 @@ void playBlackjack(Card *deck, int *tokens){
     if (dealerValue > 21 || playerValue > dealerValue){
         if(playerValue == 21 && playerCardCount == 2){
             printf("Blackjack! You win 3 to 2!\n");
-            *tokens += bet * 1.5;
+            tokens += bet * 1.5;
         }
         else{
             printf("You win! You win 1 to 1!\n");
-            *tokens += bet;
+            tokens += bet;
         }
     }
     else if(playerValue < dealerValue){
         printf("Dealer wins! You lost your bet.\n");
-        *tokens -= bet;
+        tokens -= bet;
     }
     else {
         printf("It's a tie! You get your bet back.\n");
     }
-    printf("You now have %d tokens.\n", *tokens);
+    printf("You now have %d tokens.\n", tokens);
 }
 
 int main(){
     Card deck[TOTAL_CARDS];
-    int tokens = 100; //Starting tokens
     while(tokens > 0){
         srand(time(NULL));
         cardDeck(deck);
         shuffleDeck(deck);
 
-        playBlackjack(deck, &tokens);
+        playBlackjack(deck);
         char choice;
         do{
             printf("Play again? (y/n): ");
