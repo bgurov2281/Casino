@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<string.h>
 
 //void updatetokens(int *tokens, int bet, int multiplier)
 //{
@@ -249,7 +250,6 @@ void blackjack()
     printf("Game over! You ended with %d tokens.\n", tokens);
     //add main menu function
 
-    return 0;
 }
 
 int RouletteSpin();
@@ -294,8 +294,6 @@ void roulette()
 
     printf("Thanks for playing Roulette with us!\n\n\n\n");
 
-
-    return 0;
 }
 
 int RouletteSpin() {
