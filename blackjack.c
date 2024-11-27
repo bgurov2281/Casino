@@ -172,15 +172,27 @@ int main(){
 
         playBlackjack(deck, &tokens);
         char choice;
-        printf("Play again? (y/n): ");
-        scanf(" %c", &choice);
+        do{
+            printf("Play again? (y/n): ");
+            scanf(" %c", &choice);
 
-        if (choice != 'y'){
+            if (choice == 'y'){
+                break;
+            }
+            else if (choice == 'n'){
+                break;
+            }
+            else{
+                printf("Invalid input. Please enter 'y' or 'n'.\n");
+            }
+        }while(choice != 'y' || choice != 'n');
+        if(choice != 'y'){
             break;
         }
     }
 
     printf("Game over! You ended with %d tokens.\n", tokens);
+    //add main menu function
 
     return 0;
 }
