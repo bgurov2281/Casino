@@ -25,18 +25,38 @@ void craps(int max,int min)
     dsum=dice1+dice2;
     dsum2=dice3+dice4;
 
+    printf("\n");
+    printf("\nPlace your bet PLEASE:\n");
+    scanf("%d", &bet);
+    printf("\n");
+    if (bet>tokens)
+    {
+        printf("\n");
+        printf("\nPlease place a bet less than or equal to %d, enter new bet:", tokens);
+        scanf("%d",&bet);
+    }
+    else 
+    {
+    printf("\n");
+    }
+    printf("\n\n");
+
     printf("Dice 1 = %d\t",dice1);
     printf("Dice 2 = %d\n",dice2);
     printf("Roll is %d\n",dsum);
     if(dsum==7||dsum==11)
     {
-        printf("What a stroke of luck, you have WON!!");
+        tokens=tokens+bet+(bet*2);
+        printf("What a stroke of luck, you have WON!!\n");
+        printf("Tokens: %d", tokens);
     }
     else
     {
         if(dsum==2||dsum==3||dsum==12)
         {
-            printf("You have lost");
+            tokens=tokens-bet;
+            printf("You have lost\n");
+            printf("Tokens: %d\n", tokens);
         }
         else 
         {
@@ -47,11 +67,15 @@ void craps(int max,int min)
             printf("Roll is %d \n",dsum2);
             if(dsum==dsum2)
             {
-                printf("Winner winner");
+                tokens=tokens+bet+(bet*2);
+                printf("Winner winner\n");
+                printf("Tokens: %d\n", tokens);
             }
             else
             {
-                printf("Unfortunely your luck runs out here");
+                tokens=tokens-bet;
+                printf("Unfortunely your luck runs out here\n");
+                printf("Tokens: %d\n", tokens);
 
             }
         }
@@ -464,7 +488,7 @@ scndodds=pout/wout;
     printf("\n");
     if(reel1==reel2 && reel2==reel3)   
     { 
-        tokens=bet+(bet*jckptodds);
+        tokens=tokens+bet+(bet*jckptodds);
         printf("Winner winner chicken dinner\n");
         printf("Tokens: %d\n", tokens); 
     }
@@ -472,7 +496,7 @@ scndodds=pout/wout;
     {
         if((reel1==reel2 && reel3!=reel2)||(reel2==reel3 && reel1!=reel3)||(reel1==reel3 && reel2!=reel3))
         {
-            tokens=bet+(bet*scndodds);
+            tokens=tokens+bet+(bet*scndodds);
             printf("Better luck next time but you're not going home with nothing\n");
             printf("Tokens: %d\n", tokens);
         }
@@ -522,7 +546,7 @@ void GameTwo(int max,int min, int lck)
     printf("\n");
     if(reel1==lck && reel2==lck && reel3==lck)   
     { 
-        tokens=bet+(bet*specificjckpt);
+        tokens=tokens+bet+(bet*specificjckpt);
         printf("Winner winner chicken dinner\n");
         printf("Tokens: %d\n", tokens); 
     }
@@ -530,7 +554,7 @@ void GameTwo(int max,int min, int lck)
     {
         if((reel1==reel2 && reel3!=reel2)||(reel2==reel3 && reel1!=reel3)||(reel1==reel3 && reel2!=reel3))
         {
-            tokens=bet+(bet*scndodds);
+            tokens=tokens+bet+(bet*scndodds);
             printf("Better luck next time but you're not going home with nothing\n");
             printf("Tokens: %d\n", tokens);
         }
@@ -582,7 +606,7 @@ void GameThree(int max,int min, int lck2)
     printf("\n");
     if(reel1==reel2 && reel2==reel3)   
     { 
-        tokens=bet+(bet*jckptodds);
+        tokens=tokens+bet+(bet*jckptodds);
         printf("Winner winner chicken dinner\n");
         printf("Tokens: %d\n", tokens); 
     }
@@ -590,7 +614,7 @@ void GameThree(int max,int min, int lck2)
     {
         if((reel1==reel2 && reel3!=reel2 && reel1==lck2)||(reel2==reel3 && reel1!=reel3 && reel2==lck2)||(reel1==reel3 && reel2!=reel3 && reel1==lck2))
         {
-            tokens=bet+(bet*pairodds);
+            tokens=tokens+bet+(bet*pairodds);
             printf("Seems like those lucky numbers did have some magic after all\n");
             printf("Tokens: %d\n", tokens);
         }
@@ -598,7 +622,7 @@ void GameThree(int max,int min, int lck2)
         {
                 if((reel1==reel2 && reel3!=reel2)||(reel2==reel3 && reel1!=reel3)||(reel1==reel3 && reel2!=reel3))
                 {
-                    tokens=bet+(bet*scndodds);
+                    tokens=tokens+bet+(bet*scndodds);
                     printf("Better luck next time but you're not going home with nothing\n");
                     printf("Tokens: %d\n", tokens);
                 }
