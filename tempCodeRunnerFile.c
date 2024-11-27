@@ -2,17 +2,25 @@
 #include<stdlib.h>
 #include<time.h>
 
+
+
 void craps(int max,int min)
 {
         srand(time(0));
 
     max=6; min=1;
     int dsum;
+    int dsum2;
     int dice1 = getRandomGenerator(max,min);
     int dice2 = getRandomGenerator(max,min);
+    int dice3 = getRandomGenerator(max,min);
+    int dice4 = getRandomGenerator(max,min);
+
     dsum=dice1+dice2;
-    printf("Dice 1= %d\t",dice1);
-    printf("Dice 2= %d\n",dice2);
+    dsum2=dice3+dice4;
+
+    printf("Dice 1 = %d\t",dice1);
+    printf("Dice 2 = %d\n",dice2);
     printf("Roll is %d\n",dsum);
     if(dsum==7||dsum==11)
     {
@@ -20,18 +28,386 @@ void craps(int max,int min)
     }
     else
     {
-        printf("Roll again");
+        if(dsum==2||dsum==3||dsum==12)
+        {
+            printf("YOU ARE A LOSER HAHAHAHA");
+        }
+        else 
+        {
+            printf("Pointer is %d\n", dsum);
+            printf("Let's roll again.");
+            printf("\nDice 1 = %d\t",dice3);
+            printf("Dice 2 = %d\n",dice4);
+            printf("Roll is %d \n",dsum2);
+            if(dsum==dsum2)
+            {
+                printf("Winner winner gets my wiener");
+            }
+            else
+            {
+                printf("LOSER LOSER BITCH ASS MFKER");
+
+            }
+        }
     }
 }
 
-void blackjack(int yeah)
-{
-    printf("yeah");
+const int NUM_SUITS = 4;
+const int NUM_RANKS = 13;
+const int NUM_CARDS = 52;
+const int TOTAL_CARDS = 104; //two decks
+
+typedef struct {
+    char *suit;
+    char *rank;
+    int value;
+} Card;
+
+void cardDeck(Card *deck){
+
+    char *suits[] = {"<3", "<>", "&&", "##"};
+    char *ranks[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K"};
+    int values[] = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}; //Blackjack Values
+
+    // deck of cards
+    for(int deckNum = 0; deckNum < 2; deckNum++){
+        for(int i = 0; i < NUM_SUITS; i++){
+            for(int j = 0; j < NUM_RANKS; j++){
+                int index = deckNum * NUM_CARDS + i * NUM_RANKS + j;
+                deck[index].suit = suits[i];
+                deck[index].rank = ranks[j];
+                deck[index].value = values[j];
+            }
+        }
+    }
 }
-void roulette(int yee)
-{
-    printf("yee");
+
+void shuffleDeck(Card *deck){
+    Card temp;
+    for(int i = 0; i < TOTAL_CARDS; i++){
+        int j = i + rand() % (TOTAL_CARDS - i);
+        temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
 }
+
+int drawCard(Card *deck, int *cardDrawn, int *currentIndex){
+    if(*currentIndex < TOTAL_CARDS){
+        int index = *currentIndex;
+        cardDrawn[index] = 1;
+        (*currentIndex)++;
+        return index;
+    }
+    return -1; //No more cards
+}
+
+int calculateHandValue(Card *deck, int *hand, int numCards){
+    int totalValue = 0, numAces = 0;
+    for(int i = 0; i < numCards; i++){
+        int cardValue = deck[hand[i]].value;
+        totalValue += cardValue;
+        if(cardValue == 11){
+            numAces++;
+        }
+    }
+    while(totalValue > 21 && numAces > 0){
+        totalValue -= 10;
+        numAces--;
+    }
+    return totalValue;
+}
+
+void printHand(Card *deck, int *hand, int numCards){
+    for (int i = 0; i < numCards; i++){
+        printf("\n/-----/\n");
+        printf("|%s   |\n", deck[hand[i]].suit);
+        printf("|  %s  |\n", deck[hand[i]].rank);
+        printf("|   %s|\n", deck[hand[i]].suit);
+        printf("/-----/\n");
+    }
+}
+
+void playBlackjack(Card *deck, int *tokens){
+    int cardDrawn[TOTAL_CARDS];
+    for(int i = 0; i < TOTAL_CARDS; i++){
+        cardDrawn[i] = 0;
+    }
+    int currentIndex = 0;
+    int playerHand[10], dealerHand[10];
+    int playerCardCount = 0, dealerCardCount = 0;
+    int bet;
+
+    //Get the player's bet
+    printf("\nYou have %d tokens. Enter your bet: ", *tokens);
+    scanf("%d", &bet);
+
+    if(bet > *tokens){
+        printf("You don't have enough tokens to make that bet.\n");
+        return;
+    }
+
+    // Starting Hands
+    playerHand[playerCardCount++] = drawCard(deck, cardDrawn, &currentIndex);
+    playerHand[playerCardCount++] = drawCard(deck, cardDrawn, &currentIndex);
+    dealerHand[dealerCardCount++] = drawCard(deck, cardDrawn, &currentIndex);
+
+    printf("\nYour hand:\n");
+    printHand(deck, playerHand, playerCardCount);
+
+    printf("\nDealer's visible card:\n");
+    printHand(deck, dealerHand, 1);
+
+    // Player's turn
+    int playerValue = calculateHandValue(deck, playerHand, playerCardCount);
+    char choice;
+    while (playerValue < 21){
+        printf("\nYour total: %d. Hit (h) or Stand (s)? ", playerValue);
+        scanf(" %c", &choice);
+        if(choice == 's'){
+            break;
+        }
+        else if(choice == 'h'){
+            playerHand[playerCardCount++] = drawCard(deck, cardDrawn, &currentIndex);
+            printf("\nYour hand:\n");
+            printHand(deck, playerHand, playerCardCount);
+            playerValue = calculateHandValue(deck, playerHand, playerCardCount);
+        }
+    }
+    if (playerValue > 21){
+        printf("\nYou busted! Dealer wins.\n");
+        *tokens -= bet;
+        return;
+    }
+
+    //Dealer's turn
+    printf("\nDealer's turn:\n");
+    while(calculateHandValue(deck, dealerHand, dealerCardCount) < 17){
+        dealerHand[dealerCardCount++] = drawCard(deck, cardDrawn, &currentIndex);
+    }
+    printf("\nDealer's hand:\n");
+    printHand(deck, dealerHand, dealerCardCount);
+
+    int dealerValue = calculateHandValue(deck, dealerHand, dealerCardCount);
+    printf("\nYour total: %d, Dealer's total: %d\n", playerValue, dealerValue);
+
+    // Determine winner and update tokens
+    if (dealerValue > 21 || playerValue > dealerValue){
+        if(playerValue == 21 && playerCardCount == 2){
+            printf("Blackjack! You win 3 to 2!\n");
+            *tokens += bet * 1.5;
+        }
+        else{
+            printf("You win! You win 1 to 1!\n");
+            *tokens += bet;
+        }
+    }
+    else if(playerValue < dealerValue){
+        printf("Dealer wins! You lost your bet.\n");
+        *tokens -= bet;
+    }
+    else {
+        printf("It's a tie! You get your bet back.\n");
+    }
+    printf("You now have %d tokens.\n", *tokens);
+}
+
+void blackjack()
+{
+    Card deck[TOTAL_CARDS];
+    int tokens = 100; //Starting tokens
+    while(tokens > 0){
+        srand(time(NULL));
+        cardDeck(deck);
+        shuffleDeck(deck);
+
+        playBlackjack(deck, &tokens);
+        char choice;
+        do{
+        printf("Play again? (y/n): ");
+        scanf(" %c", &choice);
+
+        if (choice == 'y'){
+            break;
+        }
+        else if (choice == 'n'){
+            break;
+        }
+        else 
+        {
+            printf("INvalid input. Please enter 'y' or 'n'.\n");
+        }
+    }while(choice != 'y' || choice != 'n');
+    if(choice != 'y'){
+        break;
+    }
+    }
+
+    printf("Game over! You ended with %d tokens.\n", tokens);
+    //add main menu function
+
+    return 0;
+}
+
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int RouletteSpin();
+char* FindColor(int number);
+void PlayRoulette(int betAmount, char* betType, int betNumber);
+
+
+
+void roulette()
+{
+    int betAmount;
+    char betType[15];
+    char userChoice;
+    int betNumber = -1;
+
+    srand(time(NULL));
+
+    printf("\n\n\n\n\n\n\n\nWelcome to the Roulette Table!\n\n\n\n");
+
+    do {
+        printf("Enter your bet amount: ");
+        scanf("%d", &betAmount);
+
+
+        printf("Enter your bet type (number, odd, even, red, black, zero): ");
+        scanf("%s", betType);
+
+        if (strcmp(betType, "number") == 0) {
+            printf("Enter the number you are betting on (0-36): ");
+            scanf("%d", &betNumber);
+            printf("\n\n");
+        }
+
+        PlayRoulette(betAmount, betType, betNumber);
+
+        printf("Do you want to continue playing? (y/n): ");
+        scanf(" %c", &userChoice);
+        printf("\n\n\n\n\n\n");
+    
+    } 
+    while (userChoice == 'Y' || userChoice == 'y');
+
+    printf("Thanks for playing Roulette with us!\n\n\n\n");
+
+
+    return 0;
+}
+
+int RouletteSpin() {
+    return rand() % 37;
+}
+
+char* FindColor(int number) {
+    if (number == 0){
+        return "green";
+    }
+
+    int redNumbers[] = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
+    int blackNumbers[] = {2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
+    
+    for (int i = 0; i < 18; ++i) {
+        if (number == redNumbers[i]) {
+            return "red";
+        }
+        if (number == blackNumbers[i]) {
+            return "black";
+        }
+    }
+    return "error";
+}
+
+void PlayRoulette(int betAmount, char* betType, int betNumber) {
+    int resultNumber = RouletteSpin();
+    char* color = FindColor(resultNumber);
+    int payOut = 0;
+
+    printf ("The Roulette Wheel landed on %d (%s)\n\n\n", resultNumber, color);
+
+
+    if (strcmp(betType, "number") == 0) {
+        if (betNumber == resultNumber) {
+            if (betNumber == resultNumber && resultNumber == 0) {
+                payOut = betAmount * 50;
+                printf("YOU HIT JACK POT!\nYou made %d\n\n\n\n", payOut);
+            } 
+            else {
+                payOut =  betAmount * 35;
+                printf("Nice, your number hit!\nYou made %d\n\n\n\n", payOut);
+            }
+        }
+        else {
+            
+            printf("Oops looks like you lost %d!\n\n\n\n", betAmount);
+        }
+    }
+    else if (strcmp(betType, "odd") == 0) {
+        if (resultNumber != 0 && resultNumber % 2 != 0) {
+            payOut = betAmount * 2;
+            printf("Your bet landed!\nYou made %d\n\n\n\n", payOut);
+        }
+        else {
+
+            printf("You lost!\nThe house took %d from you\n\n\n\n", betAmount);
+        }
+    }
+    else if (strcmp(betType, "even") == 0) {
+        if (resultNumber != 0 && resultNumber % 2 == 0) {
+            payOut = betAmount * 2;
+            printf("Yippy your bet hit!\nYou made %d\n\n\n\n", payOut );
+        }
+        else {
+
+            printf("Better luck next time!\nYou lost %d\n\n\n\n", betAmount);
+        }
+    }
+    else if (strcmp(betType, "red") == 0) {
+        if (strcmp(color, "red") == 0) {
+            payOut = betAmount * 2;
+            printf("Good job, your bet hit!\nYou made %d\n\n\n\n", payOut);
+        }
+        else {
+
+            printf("Oh no your bet didn't land!\nYou lost %d\n\n\n\n", betAmount);
+        }
+    }
+    else if (strcmp(betType, "black") == 0) {
+        if (strcmp(color, "black") == 0) {
+            payOut = betAmount * 2;
+            printf("You're a pro, you should gamble more!\nYou made %d\n\n\n\n", payOut);
+        }
+        else {
+
+            printf("Wow, that was a lousy bet!\nYou lost %d\n\n\n\n", betAmount);
+        }
+    }
+    else if (strcmp(betType, "zero") == 0) {
+        if (resultNumber == 0) {
+            payOut = betAmount * 50;
+            printf("CONGRATULATIONS YOU HIT JACKPOT!\nYou made %d\n\n\n\n", payOut);
+        }
+        else {
+
+            printf("What the Sigma!\nYou lost %d\n\n\n\n", betAmount);
+        }
+    }
+    else {
+        printf("Invalid bet type\n\n\n\n");
+    }
+}
+
+
+
+
+
+
 void cashout(int cash)
 {
     printf("cash");
@@ -243,8 +619,8 @@ int main()
 {
 
     int yeah,yee,cash,max,min,tokens,lck,lck2,choice;
-    printf("How many tokens would you like to buy: \n");
-    scanf("%d", &tokens);
+   // printf("How many tokens would you like to buy: \n");
+    //scanf("%d", &tokens);
     //int choice;
     while(1)
     {
@@ -254,8 +630,8 @@ int main()
         printf("2.Black Jack \n");
         printf("3.Roulette \n");
         printf("4.Craps \n");
-        printf("5.Cashout \n");
-        printf("6.Quit \n");
+        //printf("5.Cashout \n");
+        printf("5.Quit \n");
         scanf("%d", &choice);
 
         switch(choice)
@@ -278,11 +654,11 @@ int main()
                     craps(max,min);
             break;
 
-            case 5:
-                    cashout(cash);
-            break;
+            //case 5:
+              //      cashout(cash);
+            //break;
 
-            case 6:
+            case 5:
                     printf("Thank you for playing. \n");
                     exit(0);
 
