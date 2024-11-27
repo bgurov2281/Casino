@@ -447,6 +447,15 @@ scndodds=pout/wout;
 
     printf("Place your bet PLEASE:");
     scanf("%d", &bet);
+    if (bet==tokens)
+    {
+        printf("Please place a bet less than or equal to %d, enter new bet:", tokens);
+        scanf("%d",&bet);
+    }
+    else 
+    {
+    printf("\n");
+    }
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
     if(reel1==reel2 && reel2==reel3)   
@@ -637,20 +646,13 @@ int main()
     while(1)
     {
         printf("\n\n");
-        printf("******************************************\n");
-        printf("*                                        *\n");
-        printf("*           $$ OHM'S CASINO $$           *\n");
-        printf("*                                        *\n");
-        printf("******************************************\n");
-        printf("*                                        *\n");
-        printf("*           1. Play Slots                *\n");
-        printf("*           2. Play Blackjack            *\n");
-        printf("*           3. Play Roulette             *\n");
-        printf("*           4. Play Craps                *\n");
-        printf("*           5. View Tokens               *\n");
-        printf("*           6. Exit                      *\n");
-        printf("*                                        *\n");
-        printf("******************************************\n");
+        printf("Welcome pick your poison: \n");
+        printf("1.Slots \n");
+        printf("2.Black Jack \n");
+        printf("3.Roulette \n");
+        printf("4.Craps \n");
+        //printf("5.Cashout \n");
+        printf("5.Quit \n");
         scanf("%d", &choice);
 
         switch(choice)
@@ -673,11 +675,11 @@ int main()
                     craps(max,min);
             break;
 
-            case 5:
-                    printf("You have %d tokens!", tokens);
-            break;
+            //case 5:
+              //      cashout(cash);
+            //break;
 
-            case 6:
+            case 5:
                     printf("Thank you for playing. \n");
                     exit(0);
 
