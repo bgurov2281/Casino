@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<string.h>
 
 //void updatetokens(int *tokens, int bet, int multiplier)
 //{
@@ -249,7 +250,6 @@ void blackjack()
     printf("Game over! You ended with %d tokens.\n", tokens);
     //add main menu function
 
-    return 0;
 }
 
 int RouletteSpin();
@@ -258,8 +258,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber);
 
 
 
-void roulette()
-{
+void roulette() {
     int betAmount;
     char betType[15];
     char userChoice;
@@ -294,8 +293,6 @@ void roulette()
 
     printf("Thanks for playing Roulette with us!\n\n\n\n");
 
-
-    return 0;
 }
 
 int RouletteSpin() {
@@ -322,6 +319,11 @@ char* FindColor(int number) {
 }
 
 void PlayRoulette(int betAmount, char* betType, int betNumber) {
+    if(betAmount > tokens) {
+        printf("You cannot bet more tokens than what you have!\n\n");
+        return;
+    }
+
     int resultNumber = RouletteSpin();
     char* color = FindColor(resultNumber);
 
@@ -579,7 +581,7 @@ void GameThree(int max,int min, int lck2)
 void slots(int lck,int lck2,int max,int min, int choice)
 {
     
-    /*tokens=10; /*
+    /*tokens=10; 
     int lck,lck2;
     int choice;
     int max, min=1;*/
