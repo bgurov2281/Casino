@@ -574,7 +574,7 @@ void GameThree(int max,int min, int lck2)
 void slots(int lck,int lck2,int max,int min, int choice)
 {
     
-    /*tokens=10; /*
+    /*tokens=10; 
     int lck,lck2;
     int choice;
     int max, min=1;*/
@@ -697,11 +697,11 @@ int main()
             break;
 
             case 2:
-                    blackjack(yeah);
+                    blackjack();
             break;
             
             case 3:
-                    roulette(yee);
+                    roulette();
             break;
 
             case 4:
