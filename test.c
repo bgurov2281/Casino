@@ -11,6 +11,7 @@ int tokens;
 int bet;
 void craps(int max,int min)
 {
+    int getRandomGenerator(int max, int min);
         srand(time(0));
 
     max=6; min=1;
@@ -319,7 +320,7 @@ char* FindColor(int number) {
 }
 
 void PlayRoulette(int betAmount, char* betType, int betNumber) {
-    if(betAmount > tokens) {
+    if(betAmount < tokens) {
         printf("You cannot bet more tokens than what you have!\n\n");
         return;
     }
@@ -668,7 +669,7 @@ int main()
             break;
             
             case 3:
-                    roulette(yee);
+                    PlayRoulette(yee,yeah,yee);
             break;
 
             case 4:
