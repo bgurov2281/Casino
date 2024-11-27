@@ -322,7 +322,7 @@ char* FindColor(int number) {
 }
 
 void PlayRoulette(int betAmount, char* betType, int betNumber) {
-    if (betNumber > tokens) {
+    if (betAmount > tokens) {
         printf("You cannot bet more tokens than what you have!\n\n\n");
         return;
     }
