@@ -437,17 +437,21 @@ wout=3*max*(max-1);
 jckptodds=pout/jckptout;
 scndodds=pout/wout;
 
-    printf("Place your bet PLEASE:");
+    printf("\n");
+    printf("\nPlace your bet PLEASE:\n");
     scanf("%d", &bet);
-    if (bet==tokens)
+    printf("\n");
+    if (bet>tokens)
     {
-        printf("Please place a bet less than or equal to %d, enter new bet:", tokens);
+        printf("\n");
+        printf("\nPlease place a bet less than or equal to %d, enter new bet:", tokens);
         scanf("%d",&bet);
     }
     else 
     {
     printf("\n");
     }
+    printf("\n\n");
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
     if(reel1==reel2 && reel2==reel3)   
@@ -491,8 +495,21 @@ void GameTwo(int max,int min, int lck)
     scndodds=pout/wout;
     specificjckpt=pout/1;
 
-    printf("Place your bet PLEASE:");
+    printf("\n");
+    printf("\nPlace your bet PLEASE:\n");
     scanf("%d", &bet);
+    printf("\n");
+    if (bet>tokens)
+    {
+        printf("\n");
+        printf("\nPlease place a bet less than or equal to %d, enter new bet:", tokens);
+        scanf("%d",&bet);
+    }
+    else 
+    {
+    printf("\n");
+    }
+    printf("\n\n");
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
     if(reel1==lck && reel2==lck && reel3==lck)   
@@ -538,8 +555,20 @@ void GameThree(int max,int min, int lck2)
     jckptodds=pout/jckptout;
     scndodds=pout/wout;
 
-    printf("Place your bet PLEASE:");
+    printf("\n");
+    printf("\nPlace your bet PLEASE:\n");
     scanf("%d", &bet);
+    printf("\n");
+    if (bet>tokens)
+    {
+        printf("\n");
+        printf("\nPlease place a bet less than or equal to %d, enter new bet:", tokens);
+        scanf("%d",&bet);
+    }
+    else 
+    {
+    printf("\n");
+    }
     printf("\n\n");
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
