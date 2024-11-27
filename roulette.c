@@ -18,7 +18,7 @@ int main() {
 
     srand(time(NULL));
 
-    printf("\nWelcome to the Roulette Table!\n\n\n\n");
+    printf("\n\n\n\n\n\n\n\nWelcome to the Roulette Table!\n\n\n\n");
 
     do {
         printf("Enter your bet amount: ");
