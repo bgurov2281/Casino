@@ -172,13 +172,21 @@ int main(){
 
         playBlackjack(deck, &tokens);
         char choice;
-        printf("Play again? (y/n): ");
-        scanf(" %c", &choice);
+        do{
+            printf("Play again? (y/n): ");
+            scanf(" %c", &choice);
 
-        if (choice == 'y'){
-            
-        }
-        else if (choice == 'n'){
+            if (choice == 'y'){
+                break;
+            }
+            else if (choice == 'n'){
+                break;
+            }
+            else{
+                printf("Invalid input. Please enter 'y' or 'n'.\n");
+            }
+        }while(choice != 'y' || choice != 'n');
+        if(choice != 'y'){
             break;
         }
     }
