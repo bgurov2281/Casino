@@ -11,6 +11,7 @@ int tokens;
 int bet;
 void craps(int max,int min)
 {
+    int getRandomGenerator(int max, int min);
         srand(time(0));
 
     max=6; min=1;
@@ -250,7 +251,7 @@ void blackjack()
     printf("Game over! You ended with %d tokens.\n", tokens);
     //add main menu function
 
-    return 0;
+    //return 0;
 }
 
 int RouletteSpin();
@@ -628,11 +629,11 @@ void gameinfo(int choice)
 {
     while(1)
     {
-        printf("1.Information on Slots");
-        printf("2.Information on Blackjack");
-        printf("3.Information on Roulette");
-        printf("4.Information on Craps");
-        printf("5.Back to Main Menu");
+        printf("1.Information on Slots\n");
+        printf("2.Information on Blackjack\n");
+        printf("3.Information on Roulette\n");
+        printf("4.Information on Craps\n");
+        printf("5.Back to Main Menu\n");
         scanf("%d", &choice);
         switch(choice)
         {
@@ -714,7 +715,7 @@ int main()
             break;
 
             case 6:
-                    gameinfo();
+                    gameinfo(choice);
             break;
 
             case 7:
