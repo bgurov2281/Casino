@@ -2,8 +2,12 @@
 #include<stdlib.h>
 #include<time.h>
 
-
-
+//void updatetokens(int *tokens, int bet, int multiplier)
+//{
+//*tokens = *tokens - bet + (bet * winMultiplier);
+//}
+int tokens;
+int bet;
 void craps(int max,int min)
 {
         srand(time(0));
@@ -30,7 +34,7 @@ void craps(int max,int min)
     {
         if(dsum==2||dsum==3||dsum==12)
         {
-            printf("YOU ARE A LOSER HAHAHAHA");
+            printf("You have lost");
         }
         else 
         {
@@ -41,11 +45,11 @@ void craps(int max,int min)
             printf("Roll is %d \n",dsum2);
             if(dsum==dsum2)
             {
-                printf("Winner winner gets my wiener");
+                printf("Winner winner");
             }
             else
             {
-                printf("LOSER LOSER BITCH ASS MFKER");
+                printf("Unfortunely your luck runs out here");
 
             }
         }
@@ -418,7 +422,7 @@ void cashout(int cash)
 int getRandomGenerator(int max, int min){
     return (rand() % (max - min + 1)) + min; 
 }
-void GameOne(int max, int min, int tokens)
+void GameOne(int max, int min)
 {
 //initialize the time for the generator
     srand(time(0));
@@ -442,12 +446,13 @@ wout=3*max*(max-1);
 jckptodds=pout/jckptout;
 scndodds=pout/wout;
 
-
+    printf("Place your bet PLEASE:");
+    scanf("%d", &bet);
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
     if(reel1==reel2 && reel2==reel3)   
     { 
-        tokens=tokens+(tokens*jckptodds);
+        tokens=bet+(bet*jckptodds);
         printf("Winner winner chicken dinner\n");
         printf("Tokens: %d\n", tokens); 
     }
@@ -455,18 +460,19 @@ scndodds=pout/wout;
     {
         if((reel1==reel2 && reel3!=reel2)||(reel2==reel3 && reel1!=reel3)||(reel1==reel3 && reel2!=reel3))
         {
-            tokens=tokens+(tokens*scndodds);
+            tokens=bet+(bet*scndodds);
             printf("Better luck next time but you're not going home with nothing\n");
             printf("Tokens: %d\n", tokens);
         }
         else
         {
+            tokens=tokens-bet;
             printf("Yeah just put the frys in the bag bro\n");
             printf("Tokens: %d\n", tokens);
         }
     }
 }
-void GameTwo(int max,int min,int tokens, int lck)
+void GameTwo(int max,int min, int lck)
 {
 
     int jckptodds; int pairout;
@@ -484,11 +490,14 @@ void GameTwo(int max,int min,int tokens, int lck)
     wout=3*max*(max-1);
     scndodds=pout/wout;
     specificjckpt=pout/1;
+
+    printf("Place your bet PLEASE:");
+    scanf("%d", &bet);
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
     if(reel1==lck && reel2==lck && reel3==lck)   
     { 
-        tokens=tokens+(tokens*specificjckpt);
+        tokens=bet+(bet*specificjckpt);
         printf("Winner winner chicken dinner\n");
         printf("Tokens: %d\n", tokens); 
     }
@@ -496,18 +505,19 @@ void GameTwo(int max,int min,int tokens, int lck)
     {
         if((reel1==reel2 && reel3!=reel2)||(reel2==reel3 && reel1!=reel3)||(reel1==reel3 && reel2!=reel3))
         {
-            tokens=tokens+(tokens*scndodds);
+            tokens=bet+(bet*scndodds);
             printf("Better luck next time but you're not going home with nothing\n");
             printf("Tokens: %d\n", tokens);
         }
         else
         {
+            tokens=tokens-bet;
             printf("Yeah just put the frys in the bag bro\n");
             printf("Tokens: %d\n", tokens);
         }
     }
 }
-void GameThree(int max,int min, int tokens, int lck2)
+void GameThree(int max,int min, int lck2)
 {
     
     int jckptodds; int pairout;
@@ -528,12 +538,14 @@ void GameThree(int max,int min, int tokens, int lck2)
     jckptodds=pout/jckptout;
     scndodds=pout/wout;
 
+    printf("Place your bet PLEASE:");
+    scanf("%d", &bet);
     printf("\n\n");
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
     if(reel1==reel2 && reel2==reel3)   
     { 
-        tokens=tokens+(tokens*jckptodds);
+        tokens=bet+(bet*jckptodds);
         printf("Winner winner chicken dinner\n");
         printf("Tokens: %d\n", tokens); 
     }
@@ -541,7 +553,7 @@ void GameThree(int max,int min, int tokens, int lck2)
     {
         if((reel1==reel2 && reel3!=reel2 && reel1==lck2)||(reel2==reel3 && reel1!=reel3 && reel2==lck2)||(reel1==reel3 && reel2!=reel3 && reel1==lck2))
         {
-            tokens=tokens+(tokens*pairodds);
+            tokens=bet+(bet*pairodds);
             printf("Seems like those lucky numbers did have some magic after all\n");
             printf("Tokens: %d\n", tokens);
         }
@@ -549,12 +561,13 @@ void GameThree(int max,int min, int tokens, int lck2)
         {
                 if((reel1==reel2 && reel3!=reel2)||(reel2==reel3 && reel1!=reel3)||(reel1==reel3 && reel2!=reel3))
                 {
-                    tokens=tokens+(tokens*scndodds);
+                    tokens=bet+(bet*scndodds);
                     printf("Better luck next time but you're not going home with nothing\n");
                     printf("Tokens: %d\n", tokens);
                 }
                         else 
                         {
+                            tokens= tokens-bet;
                             printf("Yeah just put the frys in the bag bro\n");
                             printf("Tokens: %d\n", tokens);
                             printf("\n\n");
@@ -562,7 +575,7 @@ void GameThree(int max,int min, int tokens, int lck2)
         }
     }
 }
-void slots(int tokens,int lck,int lck2,int max,int min, int choice)
+void slots(int lck,int lck2,int max,int min, int choice)
 {
     
     /*tokens=10; /*
@@ -586,7 +599,7 @@ switch(choice)
             printf("Welcome to Traditional Jackpot, rules are simple, there is a standard payout with 3 different payout possibilites \n 100 to 1 payout for 10 symbols \n 400 to 1 payout for 20 symbols \n 900 to 1 payout for 30 symbols\n");
             printf("Choose your odds, 10, 20 or 30: \n");
             scanf("%d", &max);
-            GameOne( max, min, tokens);
+            GameOne( max, min);
     break;
 
     case 2:
@@ -594,7 +607,7 @@ switch(choice)
             printf("Choose your lucky number(1-20): \n");
             scanf("%d", &lck);
             max=20;
-            GameTwo( max, min, tokens, lck);
+            GameTwo( max, min, lck);
     break;
 
     case 3:
@@ -602,7 +615,7 @@ switch(choice)
             printf("Choose your lucky pair(1-20): \n");
             scanf("%d", &lck2);
             max=20;
-            GameThree( max, min, tokens, lck2);
+            GameThree( max, min, lck2);
     break;
 
     case 4:
@@ -618,9 +631,9 @@ switch(choice)
 int main()
 {
 
-    int yeah,yee,cash,max,min,tokens,lck,lck2,choice;
-   // printf("How many tokens would you like to buy: \n");
-    //scanf("%d", &tokens);
+    int yeah,yee,cash,max,min,lck,lck2,choice;
+     printf("Welcome to Ohms Casino how many tokens would you like to buy: \n");
+     scanf("%d", &tokens);
     //int choice;
     while(1)
     {
@@ -637,7 +650,7 @@ int main()
         switch(choice)
         {
             case 1:
-                    slots(tokens,lck,lck2,max,min,choice);
+                    slots(lck,lck2,max,min,choice);
             break;
 
             case 2:
