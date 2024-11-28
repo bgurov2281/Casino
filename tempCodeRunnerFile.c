@@ -354,7 +354,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber) {
     int resultNumber = RouletteSpin();
     char* color = FindColor(resultNumber);
 
-    printf ("The Roulette Wheel landed on %d (%s)\n\n\n", resultNumber, color);
+    printf ("\nThe Roulette Wheel landed on %d (%s).\n\n\n", resultNumber, color);
 
 
     if (strcmp(betType, "number") == 0) {
@@ -362,72 +362,72 @@ void PlayRoulette(int betAmount, char* betType, int betNumber) {
             if (betNumber == resultNumber && resultNumber == 0) {
                 payOut = betAmount * 50;
                 tokens += betAmount * 50;
-                printf("YOU HIT JACK POT!\nYou made %d tokens\n\n\n\n", tokens);
+                printf("YOU HIT JACK POT!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
             } 
             else {
                 payOut = betAmount * 35;
                 tokens +=  betAmount * 35;
-                printf("Nice, your number hit!\nYou made %d tokens\n\n\n\n", tokens);
+                printf("Nice, your number hit!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
             }
         }
         else {
             tokens -= betAmount;
-            printf("Oops looks like you lost %d tokens!\n\n\n\n", betAmount);
+            printf("Oops looks like you lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "odd") == 0) {
         if (resultNumber != 0 && resultNumber % 2 != 0) {
             payOut = betAmount * 2;
             tokens += betAmount * 2;
-            printf("Your bet landed!\nYou made %d tokens\n\n\n\n", payOut);
+            printf("Your bet landed!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("You lost!\nThe house took %d tokens from you\n\n\n\n", betAmount);
+            printf("You lost!\n\nThe house took %d tokens from you!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "even") == 0) {
         if (resultNumber != 0 && resultNumber % 2 == 0) {
             payOut = betAmount * 2;
             tokens += betAmount * 2;
-            printf("Yippy your bet hit!\nYou made %d tokens\n\n\n\n", tokens );
+            printf("Yippy your bet hit!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("Better luck next time!\nYou lost %d tokens\n\n\n\n", betAmount);
+            printf("Better luck next time!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "red") == 0) {
         if (strcmp(color, "red") == 0) {
             payOut = betAmount * 2;
             tokens += betAmount * 2;
-            printf("Good job, your bet hit!\nYou made %d tokens\n\n\n\n", tokens);
+            printf("Good job, your bet hit!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("Oh no your bet didn't land!\nYou lost %d tokens\n\n\n\n", betAmount);
+            printf("Oh no your bet didn't land!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "black") == 0) {
         if (strcmp(color, "black") == 0) {
             payOut = betAmount * 2;
             tokens += betAmount * 2;
-            printf("You're a pro, you should gamble more!\nYou made %d tokens\n\n\n\n", tokens);
+            printf("You're a pro, you should gamble more!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("Wow, that was a lousy bet!\nYou lost %d tokens\n\n\n\n", betAmount);
+            printf("Wow, that was a lousy bet!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "zero") == 0) {
         if (resultNumber == 0) {
             payOut = betAmount * 50;
             tokens += betAmount * 50;
-            printf("CONGRATULATIONS YOU HIT JACKPOT!\nYou made %d tokens\n\n\n\n", tokens);
+            printf("CONGRATULATIONS YOU HIT JACKPOT!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("What the Sigma!\nYou lost %d tokens\n\n\n\n", betAmount);
+            printf("What the Sigma!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else {
@@ -732,7 +732,7 @@ int main()
 {
 
     int yeah,yee,cash,max,min,lck,lck2,choice;
-     printf("Welcome to Ohms Casino how many tokens would you like to buy: \n");
+     printf("\n\nWelcome to Ohms Casino how many tokens would you like to buy: \n");
      scanf("%d", &tokens);
     //int choice;
     while(1)
