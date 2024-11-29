@@ -694,11 +694,15 @@ void gameinfo(int choice)
 {
     while(1)
     {
-        printf("1.Information on Slots\n");
-        printf("2.Information on Blackjack\n");
-        printf("3.Information on Roulette\n");
-        printf("4.Information on Craps\n");
-        printf("5.Back to Main Menu\n");
+        printf("******************************************\n");
+        printf("*                                        *\n");
+        printf("*        1. Information on Slots         *\n");
+        printf("*        2. Information on Blackjack     *\n");
+        printf("*        3. Information on Roulette      *\n");
+        printf("*        4. Information on Craps         *\n");
+        printf("*        5. Back to Main Menu            *\n");
+        printf("*                                        *\n");
+        printf("******************************************\n");
         scanf("%d", &choice);
         switch(choice)
         {
@@ -707,7 +711,25 @@ void gameinfo(int choice)
         break;
 
         case 2:
-
+            printf("\nCard Values\n");
+            printf("1: Number Cards (2-10) are worth their face value.\n");
+            printf("2: Face cards (Jack, Queen, King) are worth 10 points each.\n");
+            printf("3: Aces can be worth 1 or 11, depending on whcih value benefits the hand most.\n\n");
+            printf("\nGameplay\n");
+            printf("1: Player is dealt two cards face-up.\n");
+            printf("2: The dealer is dealt one card face-up and one face down (the 'hole card').\n");
+            printf("3: Player decides to hit or stand\n");
+            printf("\t3.1: Hit- to take another card. Player can hit as many times as they want until hand totals 21 or player 'busts.'\n");
+            printf("\t3.2: Stand- to keep the current total and end the turn.\n");
+            printf("4: The dealer reveals their 'hole card' once the player finishes their turn.\n");
+            printf("\t4.1: The dealer must 'hit' until their hand totals at least 17.\n\n");
+            printf("\nWinning and Losing\n");
+            printf("1: Blackjack- A hand totaling 21 with an Ace and a 10-point card on the first two cards.\n");
+            printf("\t1.1: The payout is 3 to 2\n");
+            printf("2: Win- Player hand total is closer to 21 than the dealers without exceeding 21.\n");
+            printf("3: Bust- If the player's hand total exceeds 21, player lose automatically, even if the dealer also busts.\n");
+            printf("4: Push- If the player and the dealer have the same hand total, its a tie, and the bet is returned.\n");
+            printf("5: Dealer Bust- If the dealer exceeds 21, all remaining players win.\n");
         break;
 
         case 3:
