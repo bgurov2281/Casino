@@ -17,4 +17,22 @@ void main(){
     printf("*                                        *\n");
     printf("******************************************\n");
 
+
+
+    printf("1.Information on Slots\n");
+    printf("2.Information on Blackjack\n");
+    printf("3.Information on Roulette\n");
+    printf("4.Information on Craps\n");
+    printf("5.Back to Main Menu\n");
+
+    printf("******************************************\n");
+    printf("*                                        *\n");
+    printf("*        1. Information on Slots         *\n");
+    printf("*        2. Information on Blackjack     *\n");
+    printf("*        3. Information on Roulette      *\n");
+    printf("*        4. Information on Craps         *\n");
+    printf("*        4. Back to Main Menu            *\n");
+    printf("*                                        *\n");
+    printf("******************************************\n");
+
 }

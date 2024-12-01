@@ -346,80 +346,88 @@ char* FindColor(int number) {
 }
 
 void PlayRoulette(int betAmount, char* betType, int betNumber) {
+    int payOut;
     if (betAmount > tokens || tokens <= 0) {
-        printf("You cannot bet more tokens than what you have!\n\n\n");
+        printf("\n\nYou cannot bet more tokens than what you have!\n\n\n");
         return;
     }
     int resultNumber = RouletteSpin();
     char* color = FindColor(resultNumber);
 
-    printf ("The Roulette Wheel landed on %d (%s)\n\n\n", resultNumber, color);
+    printf ("\nThe Roulette Wheel landed on %d (%s).\n\n\n", resultNumber, color);
 
 
     if (strcmp(betType, "number") == 0) {
         if (betNumber == resultNumber) {
             if (betNumber == resultNumber && resultNumber == 0) {
+                payOut = betAmount * 50;
                 tokens += betAmount * 50;
-                printf("YOU HIT JACK POT!\nYou made %d tokens\n\n\n\n", tokens);
+                printf("YOU HIT JACK POT!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
             } 
             else {
+                payOut = betAmount * 35;
                 tokens +=  betAmount * 35;
-                printf("Nice, your number hit!\nYou made %d tokens\n\n\n\n", tokens);
+                printf("Nice, your number hit!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
             }
         }
         else {
             tokens -= betAmount;
-            printf("Oops looks like you lost %d tokens!\n\n\n\n", betAmount);
+            printf("Oops looks like you lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "odd") == 0) {
         if (resultNumber != 0 && resultNumber % 2 != 0) {
+            payOut = betAmount * 2;
             tokens += betAmount * 2;
-            printf("Your bet landed!\nYou made %d tokens\n\n\n\n", tokens);
+            printf("Your bet landed!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("You lost!\nThe house took %d tokens from you\n\n\n\n", betAmount);
+            printf("You lost!\n\nThe house took %d tokens from you!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "even") == 0) {
         if (resultNumber != 0 && resultNumber % 2 == 0) {
+            payOut = betAmount * 2;
             tokens += betAmount * 2;
-            printf("Yippy your bet hit!\nYou made %d tokens\n\n\n\n", tokens );
+            printf("Yippy your bet hit!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("Better luck next time!\nYou lost %d tokens\n\n\n\n", betAmount);
+            printf("Better luck next time!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "red") == 0) {
         if (strcmp(color, "red") == 0) {
+            payOut = betAmount * 2;
             tokens += betAmount * 2;
-            printf("Good job, your bet hit!\nYou made %d tokens\n\n\n\n", tokens);
+            printf("Good job, your bet hit!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("Oh no your bet didn't land!\nYou lost %d tokens\n\n\n\n", betAmount);
+            printf("Oh no your bet didn't land!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "black") == 0) {
         if (strcmp(color, "black") == 0) {
+            payOut = betAmount * 2;
             tokens += betAmount * 2;
-            printf("You're a pro, you should gamble more!\nYou made %d tokens\n\n\n\n", tokens);
+            printf("You're a pro, you should gamble more!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("Wow, that was a lousy bet!\nYou lost %d tokens\n\n\n\n", betAmount);
+            printf("Wow, that was a lousy bet!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else if (strcmp(betType, "zero") == 0) {
         if (resultNumber == 0) {
+            payOut = betAmount * 50;
             tokens += betAmount * 50;
-            printf("CONGRATULATIONS YOU HIT JACKPOT!\nYou made %d tokens\n\n\n\n", tokens);
+            printf("CONGRATULATIONS YOU HIT JACKPOT!\n\nYou made %d tokens!\n\nYou now have %d tokens!\n\n\n\n", payOut, tokens);
         }
         else {
             tokens -= betAmount;
-            printf("What the Sigma!\nYou lost %d tokens\n\n\n\n", betAmount);
+            printf("What the Sigma!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
     else {
@@ -686,11 +694,15 @@ void gameinfo(int choice)
 {
     while(1)
     {
-        printf("1.Information on Slots\n");
-        printf("2.Information on Blackjack\n");
-        printf("3.Information on Roulette\n");
-        printf("4.Information on Craps\n");
-        printf("5.Back to Main Menu\n");
+        printf("******************************************\n");
+        printf("*                                        *\n");
+        printf("*        1. Information on Slots         *\n");
+        printf("*        2. Information on Blackjack     *\n");
+        printf("*        3. Information on Roulette      *\n");
+        printf("*        4. Information on Craps         *\n");
+        printf("*        5. Back to Main Menu            *\n");
+        printf("*                                        *\n");
+        printf("******************************************\n");
         scanf("%d", &choice);
         switch(choice)
         {
@@ -699,11 +711,41 @@ void gameinfo(int choice)
         break;
 
         case 2:
-
+            printf("\nCard Values\n");
+            printf("1: Number Cards (2-10) are worth their face value.\n");
+            printf("2: Face cards (Jack, Queen, King) are worth 10 points each.\n");
+            printf("3: Aces can be worth 1 or 11, depending on whcih value benefits the hand most.\n\n");
+            printf("\nGameplay\n");
+            printf("1: Player is dealt two cards face-up.\n");
+            printf("2: The dealer is dealt one card face-up and one face down (the 'hole card').\n");
+            printf("3: Player decides to hit or stand\n");
+            printf("\t3.1: Hit- to take another card. Player can hit as many times as they want until hand totals 21 or player 'busts.'\n");
+            printf("\t3.2: Stand- to keep the current total and end the turn.\n");
+            printf("4: The dealer reveals their 'hole card' once the player finishes their turn.\n");
+            printf("\t4.1: The dealer must 'hit' until their hand totals at least 17.\n\n");
+            printf("\nWinning and Losing\n");
+            printf("1: Blackjack- A hand totaling 21 with an Ace and a 10-point card on the first two cards.\n");
+            printf("\t1.1: The payout is 3 to 2\n");
+            printf("2: Win- Player hand total is closer to 21 than the dealers without exceeding 21.\n");
+            printf("3: Bust- If the player's hand total exceeds 21, player lose automatically, even if the dealer also busts.\n");
+            printf("4: Push- If the player and the dealer have the same hand total, its a tie, and the bet is returned.\n");
+            printf("5: Dealer Bust- If the dealer exceeds 21, all remaining players win.\n");
         break;
 
         case 3:
-
+            printf("\nBet Types: \n");
+            printf("1: Black or Red are the colors (excluding 0 because it is green) of the slots 1-36 that you can bet on.\n");
+            printf("2: Numbers bet is a bet where you can choose what number (0-36) that you think the wheel will land on.\n");
+            printf("3: Odd or Even bet is a bet where you choose if you think the wheel will land on an odd or even number.\n");
+            printf("4: Zero bet is where you bet on the number 0 which is the only Green slot on the wheel.\n");
+            printf("\t4.1: Because zero is the only green slot on the wheel we decided to make it our Jackpot slot.\n");
+            printf("\t4.2: You can choose to bet on 0 by typing 'zero' or typing 'number' and entering the number 0 after asked for bet type.\n");
+            printf("\nPay Outs:\n");
+            printf("Black, Red, Odd, and Even type bets all have a 1 to 1 pay out, meaning you double your tokens if your bet lands.\n");
+            printf("Number type bets (except 0) have a times 35 pay out, meaning your pay out will be your bet amount times 35 if your number lands.\n");
+            printf("Zero bet (including betting 'number' then typing number '0') is the jackpot with a bet amount times 50 pay out if 0 lands.\n");
+            printf("In all bet types if your bet does not land you will lose the amount of tokens you bet on for your type of bet, so play recklessly!\n");
+            printf("\nNow let your addiction to gambling begin, have fun, stay committed, and remember 100%% of gamblers quit before making millions!\n\n\n");
         break;
 
         case 4:
@@ -724,7 +766,7 @@ int main()
 {
 
     int yeah,yee,cash,max,min,lck,lck2,choice;
-     printf("Welcome to Ohms Casino how many tokens would you like to buy: \n");
+     printf("\n\nWelcome to Ohms Casino how many tokens would you like to buy: \n");
      scanf("%d", &tokens);
     //int choice;
     while(1)
