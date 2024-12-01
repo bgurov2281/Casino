@@ -348,7 +348,7 @@ char* FindColor(int number) {
 void PlayRoulette(int betAmount, char* betType, int betNumber) {
     int payOut;
     if (betAmount > tokens || tokens <= 0) {
-        printf("You cannot bet more tokens than what you have!\n\n\n");
+        printf("\n\nYou cannot bet more tokens than what you have!\n\n\n");
         return;
     }
     int resultNumber = RouletteSpin();
@@ -733,7 +733,19 @@ void gameinfo(int choice)
         break;
 
         case 3:
-
+            printf("\nBet Types: \n");
+            printf("1: Black or Red are the colors (excluding 0 because it is green) of the slots 1-36 that you can bet on.\n");
+            printf("2: Numbers bet is a bet where you can choose what number (0-36) that you think the wheel will land on.\n");
+            printf("3: Odd or Even bet is a bet where you choose if you think the wheel will land on an odd or even number.\n");
+            printf("4: Zero bet is where you bet on the number 0 which is the only Green slot on the wheel.\n");
+            printf("\t4.1: Because zero is the only green slot on the wheel we decided to make it our Jackpot slot.\n");
+            printf("\t4.2: You can choose to bet on 0 by typing 'zero' or typing 'number' and entering the number 0 after asked for bet type.\n");
+            printf("\nPay Outs:\n");
+            printf("Black, Red, Odd, and Even type bets all have a 1 to 1 pay out, meaning you double your tokens if your bet lands.\n");
+            printf("Number type bets (except 0) have a times 35 pay out, meaning your pay out will be your bet amount times 35 if your number lands.\n");
+            printf("Zero bet (including betting 'number' then typing number '0') is the jackpot with a bet amount times 50 pay out if 0 lands.\n");
+            printf("In all bet types if your bet does not land you will lose the amount of tokens you bet on for your type of bet, so play recklessly!\n");
+            printf("\nNow let your addiction to gambling begin, have fun, stay committed, and remember 100%% of gamblers quit before making millions!\n\n\n");
         break;
 
         case 4:
