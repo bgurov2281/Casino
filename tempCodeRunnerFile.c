@@ -315,7 +315,7 @@ void blackjack()
     printf("Game over! You ended with %d tokens.\n", tokens);
 
 }
-
+// Declaring functions used for roulette wheel
 int RouletteSpin();
 char* FindColor(int number);
 void PlayRoulette(int betAmount, char* betType, int betNumber);
@@ -329,11 +329,11 @@ void roulette()
     char userChoice;
     int betNumber = -1;
 
-    srand(time(NULL));
+    srand(time(NULL)); //seed the random number generator in time so maximize the random chance
 
     printf("\n\n\n\n\n\n\n\nWelcome to the Roulette Table!\n\n\n\n");
 
-    do {
+    do { //prompting user for bet amount, bet type, and if they want to continue playing
         printf("Enter your bet amount: ");
         scanf("%d", &betAmount);
 
@@ -360,11 +360,11 @@ void roulette()
 
 }
 
-int RouletteSpin() {
+int RouletteSpin() {  //Function for random number generator used for roulette wheel.
     return rand() % 37;
 }
 
-char* FindColor(int number) {
+char* FindColor(int number) {  //function used to find the color of a specific random number, routing the color and number values together
     if (number == 0){
         return "green";
     }
@@ -383,19 +383,19 @@ char* FindColor(int number) {
     return "error";
 }
 
-void PlayRoulette(int betAmount, char* betType, int betNumber) {
+void PlayRoulette(int betAmount, char* betType, int betNumber) { //function used for playing roulette
     int payOut;
-    if (betAmount > tokens || tokens <= 0) {
+    if (betAmount > tokens || tokens <= 0) { //prompt user they can only bet the amount of tokens they have available
         printf("\n\nYou cannot bet more tokens than what you have!\n\n\n");
         return;
     }
-    int resultNumber = RouletteSpin();
+    int resultNumber = RouletteSpin();  //initializing functions equal to variables to make coding easier
     char* color = FindColor(resultNumber);
 
-    printf ("\nThe Roulette Wheel landed on %d (%s).\n\n\n", resultNumber, color);
+    printf ("\nThe Roulette Wheel landed on %d (%s).\n\n\n", resultNumber, color); //result of roulette spin in number and color
 
 
-    if (strcmp(betType, "number") == 0) {
+    if (strcmp(betType, "number") == 0) { //outcomes for number type bet
         if (betNumber == resultNumber) {
             if (betNumber == resultNumber && resultNumber == 0) {
                 payOut = betAmount * 50;
@@ -413,7 +413,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber) {
             printf("Oops looks like you lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
-    else if (strcmp(betType, "odd") == 0) {
+    else if (strcmp(betType, "odd") == 0) { //outcomes for odd type bet
         if (resultNumber != 0 && resultNumber % 2 != 0) {
             payOut = betAmount * 2;
             tokens += betAmount * 2;
@@ -424,7 +424,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber) {
             printf("You lost!\n\nThe house took %d tokens from you!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
-    else if (strcmp(betType, "even") == 0) {
+    else if (strcmp(betType, "even") == 0) { //outcomes for even type bet
         if (resultNumber != 0 && resultNumber % 2 == 0) {
             payOut = betAmount * 2;
             tokens += betAmount * 2;
@@ -435,7 +435,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber) {
             printf("Better luck next time!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
-    else if (strcmp(betType, "red") == 0) {
+    else if (strcmp(betType, "red") == 0) { //outcomes for red type bet
         if (strcmp(color, "red") == 0) {
             payOut = betAmount * 2;
             tokens += betAmount * 2;
@@ -446,7 +446,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber) {
             printf("Oh no your bet didn't land!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
-    else if (strcmp(betType, "black") == 0) {
+    else if (strcmp(betType, "black") == 0) { //outcomes for black type bet
         if (strcmp(color, "black") == 0) {
             payOut = betAmount * 2;
             tokens += betAmount * 2;
@@ -457,7 +457,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber) {
             printf("Wow, that was a lousy bet!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
-    else if (strcmp(betType, "zero") == 0) {
+    else if (strcmp(betType, "zero") == 0) { //outcomes for zero type bet (jackpot)
         if (resultNumber == 0) {
             payOut = betAmount * 50;
             tokens += betAmount * 50;
@@ -468,7 +468,7 @@ void PlayRoulette(int betAmount, char* betType, int betNumber) {
             printf("What the Sigma!\n\nYou lost %d tokens!\n\nYou now have %d tokens!\n\n\n\n", betAmount, tokens);
         }
     }
-    else {
+    else { //inavlid type bet outcome 
         printf("Invalid bet type\n\n\n\n");
     }
 }
