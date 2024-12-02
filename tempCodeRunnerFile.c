@@ -3,14 +3,40 @@
 #include<time.h>
 #include<string.h>
 
-//void updatetokens(int *tokens, int bet, int multiplier)
-//{
-//*tokens = *tokens - bet + (bet * winMultiplier);
-//}
+//global variables
 int tokens;
 int bet;
+
+//Function to print ouf the dice face based on the random number generated
+void printDiceFace(int num) {
+    switch(num) {
+        case 1:
+            printf(" ___________\n|           |\n|           |\n|     *     |\n|           |\n|___________|\n");
+            break;
+        case 2:
+            printf(" ___________\n|           |\n|  *        |\n|           |\n|        *  |\n|___________|\n");
+            break;
+        case 3:
+            printf(" ___________\n|           |\n|  *        |\n|     *     |\n|        *  |\n|___________|\n");
+            break;
+        case 4:
+            printf(" ___________\n|           |\n|  *     *  |\n|           |\n|  *     *  |\n|___________|\n");
+            break;
+        case 5:
+            printf(" ___________\n|           |\n|  *     *  |\n|     *     |\n|  *     *  |\n|___________|\n");
+            break;
+        case 6:
+            printf(" ___________\n|           |\n|  *     *  |\n|  *     *  |\n|  *     *  |\n|___________|\n");
+            break;
+        default:
+            printf("Invalid dice number\n");
+            break;
+    }
+}
+
 void craps(int max,int min)
 {
+//declaring the random generator and initializing time for the generator
     int getRandomGenerator(int max, int min);
         srand(time(0));
 
@@ -22,28 +48,30 @@ void craps(int max,int min)
     int dice3 = getRandomGenerator(max,min);
     int dice4 = getRandomGenerator(max,min);
 
+// denoting the sum for the rolls
     dsum=dice1+dice2;
     dsum2=dice3+dice4;
 
+//ask user for bet
     printf("\n");
+    printf("\nAvailable Tokens: %d\n", tokens);
     printf("\nPlace your bet PLEASE:\n");
     scanf("%d", &bet);
     printf("\n");
-    if (bet>tokens)
+   
+//loop to prevent a negative balance
+    while (bet>tokens)
     {
         printf("\n");
         printf("\nPlease place a bet less than or equal to %d, enter new bet:", tokens);
         scanf("%d",&bet);
     }
-    else 
-    {
-    printf("\n");
-    }
+    
     printf("\n\n");
 
-    printf("Dice 1 = %d\t",dice1);
-    printf("Dice 2 = %d\n",dice2);
-    printf("Roll is %d\n",dsum);
+    printDiceFace(dice1); printf("\t\t\n");
+    printDiceFace(dice2);
+    printf("\nRoll is %d\n",dsum);
     if(dsum==7||dsum==11)
     {
         tokens=tokens+bet+(bet*2);
@@ -61,10 +89,12 @@ void craps(int max,int min)
         else 
         {
             printf("Pointer is %d\n", dsum);
-            printf("Let's roll again.");
-            printf("\nDice 1 = %d\t",dice3);
-            printf("Dice 2 = %d\n",dice4);
-            printf("Roll is %d \n",dsum2);
+            printf("Let's roll again.\n");
+
+            printDiceFace(dice3); printf("\t\t\n");
+            printDiceFace(dice4);
+
+            printf("\nRoll is %d \n",dsum2);
             if(dsum==dsum2)
             {
                 tokens=tokens+bet+(bet*2);
@@ -441,7 +471,7 @@ void cashout(int cash)
 }
 
 
-//function for random number generator for the reels
+//function for random number generator for the reels as well as the dice
 int getRandomGenerator(int max, int min){
     return (rand() % (max - min + 1)) + min; 
 }
@@ -469,23 +499,26 @@ wout=3*max*(max-1);
 jckptodds=pout/jckptout;
 scndodds=pout/wout;
 
+//ask user for bet
     printf("\n");
+    printf("\nAvailable Tokens: %d\n", tokens);
     printf("\nPlace your bet PLEASE:\n");
     scanf("%d", &bet);
     printf("\n");
-    if (bet>tokens)
+    
+//loop to prevent negative balance
+    while (bet>tokens)
     {
         printf("\n");
         printf("\nPlease place a bet less than or equal to %d, enter new bet:", tokens);
         scanf("%d",&bet);
     }
-    else 
-    {
-    printf("\n");
-    }
+    
     printf("\n\n");
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
+    
+    // Nested if else that reads the outcomes to output winnings or loss
     if(reel1==reel2 && reel2==reel3)   
     { 
         tokens=tokens+bet+(bet*jckptodds);
@@ -518,32 +551,38 @@ void GameTwo(int max,int min, int lck)
     int wout;
     int specificjckpt;
 
+//Generating the random reels
     int reel1 = getRandomGenerator(max,min);
     int reel2 = getRandomGenerator(max,min);
     int reel3 = getRandomGenerator(max,min);
    
+   //Calculator for the payout
     pout=max*max*max;
     wout=3*max*(max-1);
     scndodds=pout/wout;
     specificjckpt=pout/1;
 
+//ask user for bet
     printf("\n");
+    printf("\nAvailable Tokens: %d\n", tokens);
     printf("\nPlace your bet PLEASE:\n");
     scanf("%d", &bet);
     printf("\n");
-    if (bet>tokens)
+    
+// loop to prevent negative balance
+    while (bet>tokens)
     {
         printf("\n");
         printf("\nPlease place a bet less than or equal to %d, enter new bet:", tokens);
         scanf("%d",&bet);
     }
-    else 
-    {
-    printf("\n");
-    }
+   
+
     printf("\n\n");
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
+    
+    // Nested if else that reads the outcomes to output winnings or loss
     if(reel1==lck && reel2==lck && reel3==lck)   
     { 
         tokens=tokens+bet+(bet*specificjckpt);
@@ -575,10 +614,12 @@ void GameThree(int max,int min, int lck2)
     int jckptout;
     int wout;
 
+//Generating the random reels
     int reel1 = getRandomGenerator(max,min);
     int reel2 = getRandomGenerator(max,min);
     int reel3 = getRandomGenerator(max,min);
 
+//Calculator for the payouts
     wout=3*max*(max-1);
     pout=max*max*max;
     jckptout=max;
@@ -587,23 +628,27 @@ void GameThree(int max,int min, int lck2)
     jckptodds=pout/jckptout;
     scndodds=pout/wout;
 
+//ask user for bet
     printf("\n");
+    printf("\nAvailable Tokens: %d\n", tokens);
     printf("\nPlace your bet PLEASE:\n");
     scanf("%d", &bet);
     printf("\n");
-    if (bet>tokens)
+    
+//loop to prevent negative balance
+    while (bet>tokens)
     {
         printf("\n");
         printf("\nPlease place a bet less than or equal to %d, enter new bet:", tokens);
         scanf("%d",&bet);
     }
-    else 
-    {
-    printf("\n");
-    }
+    
+
     printf("\n\n");
     printf("%d  %d  %d",reel1,reel2,reel3);
     printf("\n");
+    
+   // Nested if else that reads the outcomes to output winnings or loss
     if(reel1==reel2 && reel2==reel3)   
     { 
         tokens=tokens+bet+(bet*jckptodds);
@@ -638,11 +683,7 @@ void GameThree(int max,int min, int lck2)
 }
 void slots(int lck,int lck2,int max,int min, int choice)
 {
-    
-    /*tokens=10; 
-    int lck,lck2;
-    int choice;
-    int max, min=1;*/
+    //This is the menu for the slots games
     min=1;
 while(1)
 {
@@ -653,7 +694,7 @@ printf("2.Super Jackpot \n");
 printf("3.Pairs Parade \n");
 printf("4.Back to Main Menu \n\n\n");
 scanf("%d", &choice);
-
+//Switch cases so the user can choose a game
 switch(choice)
 {
     case 1:
@@ -687,7 +728,7 @@ switch(choice)
                 printf("Invalid Choice. Feel free to try again. \n");
 }
 }
-//return 0;
+
 }
 
 void gameinfo(int choice)
@@ -707,6 +748,32 @@ void gameinfo(int choice)
         switch(choice)
         {
         case 1:
+                printf("\nOdds\n");
+                printf("First off odds are based on the ratio of symbols to probability for the specific win.\n");
+                printf("The ratio states that if odds are 10:1 the payout is 10 tokens won for every 1 token bet.\n");
+                printf("Therefore the odds will change and to know payout as will be described below the first number in the ratio is the the winning for token bet.\n");
+                printf("\nGame #1\n");
+                printf("In Traditional Jackpot there are 3 different options for odds.\n");
+                printf("The first odds are with 10 symbols, meaning it'll only generate numbers 1-10 giving 100:1 odds for a jackpot win.\n");
+                printf("The secondd odds are with 20 symbols, giving a 400:1 payout for a jackpot win.\n");
+                printf("The third odds are with 30 symbols, giving 900:1 payout for a jackpot win.\n");
+                printf("A jackpot win in this game means all 3 reels match up with the same number for jackpot win.\n");
+                printf("In this game you will also receive a payout for matching pairs, this can be any pair.\n");
+                printf("The payouts for the pairs will be less than the jackpot winning but still a win.\n");
+                printf("For a 10 symbol game the payout for pairs is 4:1\n For a 20 symbol game the payout for pairs is 7:1\nFor a 30 symbol game the payout for pairs is 10:1.\n ");
+                printf("Therefore to sum up the least symbols means higher probability of win therefore lower payout and more is lower probability meaning higher payout.\n");
+                printf("For a jackpot all 3 symbols must match, and for a pairs payout only 2 must match, these payouts will be the standard payout in the other 2 games as well.\n");
+                printf("\nGame#2\n");
+                printf("In Super Jackpot the symbols are fixed down to only 20 symbols meaning the game has a standard payout for 20 symbols that was described in Game#1.\n");
+                printf("This game lets you pick a lucky number for a jackpot winning.\n");
+                printf("What this entails is that if you draw a jackpot with the lucky number your payout is 8000:1.\n");
+                printf("Now if you draw a jackpot but the lucky number is not drawn, the payout is the standard jackpot payout for 20 symbols.\n");
+                printf("The payout for pairs in this game is also the standard payout for pairs in a 20 symbol game. \n");
+                printf("\nGame#3\n");
+                printf("Pairs Parade is a fixed game of 20 symbols meaning standard payouts are drawn from the traditional game at 20 symbols.\n");
+                printf("This game lets you pick a lucky number for a pairs winning only\n");
+                printf("What this means is that if you draw pairs with your lucky number you get a 21:1 payout.\n");
+                printf("The rest of the payouts for jackpot and pairs are standard.\n");
 
         break;
 
@@ -749,7 +816,14 @@ void gameinfo(int choice)
         break;
 
         case 4:
-
+            printf("\nThis game operates under only one bet type and a 1:1 odds for payouts.\n");
+            printf("This game is played with two dice, and the roll is the sum of both dice.\n");
+            printf("The first roll can determine a win or loss.\n");
+            printf("If you roll a 7 or 11 on the first roll you automatically win.\n");
+            printf("A roll of 2,3, or 12 though is an automatic loss.\n");
+            printf("Now if you roll none of these values the number you rolled becomes your pointer.\n");
+            printf("This means that your pointer is the number that must be rolled again in order to win.\n");
+            printf("If the pointer does not match the second roll you have lost.\n\n");
         break;
 
         case 5:
@@ -768,7 +842,7 @@ int main()
     int yeah,yee,cash,max,min,lck,lck2,choice;
      printf("\n\nWelcome to Ohms Casino how many tokens would you like to buy: \n");
      scanf("%d", &tokens);
-    //int choice;
+
     while(1)
     {
         printf("\n\n");
