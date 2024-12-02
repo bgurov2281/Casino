@@ -687,13 +687,20 @@ void slots(int lck,int lck2,int max,int min, int choice)
     min=1;
 while(1)
 {
-printf("\n\n");
-printf("Choose a game any game: \n");
-printf("1.Traditional Jackpot \n");
-printf("2.Super Jackpot \n");
-printf("3.Pairs Parade \n");
-printf("4.Back to Main Menu \n\n\n");
-scanf("%d", &choice);
+    printf("\n\n");
+    printf("******************************************\n");
+    printf("*                                        *\n");
+    printf("*   777   Choose a game any game   777   *\n");
+    printf("*                                        *\n");
+    printf("******************************************\n");
+    printf("*                                        *\n");
+    printf("*         1. Traditional Jackpot         *\n");
+    printf("*         2. Super Jackpot               *\n");
+    printf("*         3. Paris Parade                *\n");
+    printf("*         4. Main Menu                   *\n");
+    printf("*                                        *\n");
+    printf("******************************************\n");
+    scanf("%d", &choice);
 //Switch cases so the user can choose a game
 switch(choice)
 {

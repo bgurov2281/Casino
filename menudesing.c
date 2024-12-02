@@ -35,4 +35,27 @@ void main(){
     printf("*                                        *\n");
     printf("******************************************\n");
 
+
+
+    printf("Choose a game any game: \n");
+    printf("1.Traditional Jackpot \n");
+    printf("2.Super Jackpot \n");
+    printf("3.Pairs Parade \n");
+    printf("4.Back to Main Menu \n\n\n");
+
+
+
+    printf("******************************************\n");
+    printf("*                                        *\n");
+    printf("*      $$ Choose a game any game $$      *\n");
+    printf("*                                        *\n");
+    printf("******************************************\n");
+    printf("*                                        *\n");
+    printf("*         1. Traditional Jackpot         *\n");
+    printf("*         2. Super Jackpot               *\n");
+    printf("*         3. Paris Parade                *\n");
+    printf("*         4. Main Menu                   *\n");
+    printf("*                                        *\n");
+    printf("******************************************\n");
+
 }
