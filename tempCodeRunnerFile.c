@@ -112,24 +112,27 @@ void craps(int max,int min)
     }
 }
 
+//Define constants for the number of suits, ranks, cards in a deck, and total cards for two decks
 const int NUM_SUITS = 4;
 const int NUM_RANKS = 13;
 const int NUM_CARDS = 52;
-const int TOTAL_CARDS = 104; //two decks
+const int TOTAL_CARDS = 104;
 
+// Define a structure for a card, which includes its suit, rank, and value
 typedef struct {
     char *suit;
     char *rank;
     int value;
 } Card;
 
+// Function to initialize the deck of cards with two decks
 void cardDeck(Card *deck){
 
-    char *suits[] = {"<3", "<>", "&&", "##"};
-    char *ranks[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K"};
+    char *suits[] = {"<3", "<>", "&&", "##"}; // Represent suits: Hearts, Diamonds, Clubs, Spades
+    char *ranks[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K"}; // Card ranks
     int values[] = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}; //Blackjack Values
 
-    // deck of cards
+    // Loop through two decks
     for(int deckNum = 0; deckNum < 2; deckNum++){
         for(int i = 0; i < NUM_SUITS; i++){
             for(int j = 0; j < NUM_RANKS; j++){
@@ -142,6 +145,7 @@ void cardDeck(Card *deck){
     }
 }
 
+// Function to shuffle the deck
 void shuffleDeck(Card *deck){
     Card temp;
     for(int i = 0; i < TOTAL_CARDS; i++){
@@ -152,6 +156,7 @@ void shuffleDeck(Card *deck){
     }
 }
 
+// Function to draw a card from the deck
 int drawCard(Card *deck, int *cardDrawn, int *currentIndex){
     if(*currentIndex < TOTAL_CARDS){
         int index = *currentIndex;
@@ -159,9 +164,10 @@ int drawCard(Card *deck, int *cardDrawn, int *currentIndex){
         (*currentIndex)++;
         return index;
     }
-    return -1; //No more cards
+    return -1; //No more cards to draw
 }
 
+// Funciton to calculate the total value of a hand
 int calculateHandValue(Card *deck, int *hand, int numCards){
     int totalValue = 0, numAces = 0;
     for(int i = 0; i < numCards; i++){
@@ -171,6 +177,7 @@ int calculateHandValue(Card *deck, int *hand, int numCards){
             numAces++;
         }
     }
+    // Adjust value of Aces from 11 to 1 if the total value exceeds 21
     while(totalValue > 21 && numAces > 0){
         totalValue -= 10;
         numAces--;
@@ -178,6 +185,7 @@ int calculateHandValue(Card *deck, int *hand, int numCards){
     return totalValue;
 }
 
+// Function to print a player's or dealer's hand in a card-like format
 void printHand(Card *deck, int *hand, int numCards){
     for (int i = 0; i < numCards; i++){
         printf("\n/-----/\n");
@@ -188,6 +196,7 @@ void printHand(Card *deck, int *hand, int numCards){
     }
 }
 
+// Function to simulate the game of Blackjack
 void playBlackjack(Card *deck){
     int cardDrawn[TOTAL_CARDS];
     for(int i = 0; i < TOTAL_CARDS; i++){
@@ -272,6 +281,7 @@ void playBlackjack(Card *deck){
     printf("You now have %d tokens.\n", tokens);
 }
 
+// Main funtion to connect all previous Blackjack functions
 void blackjack()
 {
     Card deck[TOTAL_CARDS];
@@ -294,7 +304,7 @@ void blackjack()
         }
         else 
         {
-            printf("INvalid input. Please enter 'y' or 'n'.\n");
+            printf("Invalid input. Please enter 'y' or 'n'.\n");
         }
     }while(choice != 'y' || choice != 'n');
     if(choice != 'y'){
@@ -303,9 +313,7 @@ void blackjack()
     }
 
     printf("Game over! You ended with %d tokens.\n", tokens);
-    //add main menu function
 
-    //return 0;
 }
 
 int RouletteSpin();
